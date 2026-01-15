@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Todo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Dashboard</h1>
+                <p class="subtitle">Overview of your tasks</p>
+            </div>
+            <a href="{{ url_for('add') }}" class="btn btn-primary">
+                <span>+</span> New Task
+            </a>
+        </header>
+
+        {% if todos %}
+            <div class="stats">
+                <div class="stat">
+                    <span>Total Tasks</span>
+                    <strong>{{ todos|length }}</strong>
+                </div>
+                <div class="stat">
+                    <span>Completed</span>
+                    <strong style="color: var(--success)">{{ todos|selectattr('completed')|list|length }}</strong>
+                </div>
+                <div class="stat">
+                    <span>Pending</span>
+                    <strong style="color: var(--warning)">{{ todos|rejectattr('completed')|list|length }}</strong>
+                </div>
+            </div>
+
+            <div class="todos-list">
+                {% for todo in todos|sort(attribute='priority', reverse=true) %}
+                    <div class="todo-card priority-{{ todo.priority }} {% if todo.completed %}completed{% endif %}">
+                        
+                        <div class="todo-header">
+                            <input type="checkbox" 
+                                   class="todo-checkbox"
+                                   {% if todo.completed %}checked{% endif %} 
+                                   onchange="location.href='{{ url_for('toggle', todo_id=todo.id) }}';">
+                            <h3 class="todo-title">{{ todo.title }}</h3>
+                        </div>
+
+                        {% if todo.description %}
+                            <p class="todo-description">{{ todo.description }}</p>
+                        {% else %}
+                            <p class="todo-description">No additional details...</p>
+                        {% endif %}
+
+                        <div class="todo-meta">
+                            {% if todo.due_date %}
+                                <span class="due-date">📅 {{ todo.due_date }}</span>
+                            {% endif %}
+                            <span>{{ todo.priority|capitalize }} Priority</span>
+                        </div>
+
+                        <div class="todo-actions">
+                            <a href="{{ url_for('view', todo_id=todo.id) }}" class="btn btn-secondary">View</a>
+                            <a href="{{ url_for('edit', todo_id=todo.id) }}" class="btn btn-secondary">Edit</a>
+                            <a href="{{ url_for('delete', todo_id=todo.id) }}" class="btn btn-danger" onclick="return confirm('Delete this task?')">Delete</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="stat" style="grid-column: 1 / -1; padding: 60px;">
+                <h2 style="margin-bottom: 20px;">All caught up!</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 30px;">You have no tasks on your list.</p>
+                <a href="{{ url_for('add') }}" class="btn btn-primary">Create Your First Task</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Edit Task</h1>
+                <p class="subtitle">Update task details</p>
+            </div>
+        </header>
+
+        <div class="form-container">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="title">Task Title <span class="required">*</span></label>
+                    <input type="text" id="title" name="title" value="{{ todo.title }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="5">{{ todo.description }}</textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="priority">Priority Level</label>
+                        <select id="priority" name="priority">
+                            <option value="low" {% if todo.priority == 'low' %}selected{% endif %}>Low Priority</option>
+                            <option value="medium" {% if todo.priority == 'medium' %}selected{% endif %}>Medium Priority</option>
+                            <option value="high" {% if todo.priority == 'high' %}selected{% endif %}>High Priority</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="due_date">Due Date</label>
+                        <input type="date" id="due_date" name="due_date" value="{{ todo.due_date or '' }}">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" style="flex: 2;">Save Changes</button>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary" style="flex: 1;">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

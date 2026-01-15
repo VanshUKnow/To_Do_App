@@ -1,0 +1,481 @@
+/* =========================================
+   1. VARIABLES & THEME SETUP
+   ========================================= */
+   :root {
+    /* Brand Colors - Lime Green */
+    --primary: #84cc16;        /* Lime 500 - Main buttons/accents */
+    --primary-hover: #65a30d;  /* Lime 600 - Hover state */
+    --primary-light: #ecfccb;  /* Lime 100 - Backgrounds/Badges */
+    --primary-dark: #365314;   /* Lime 900 - Text on lime */
+    
+    /* Semantic Colors */
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #10b981; /* distinct from primary to indicate 'safe' */
+    
+    /* Neutral / Light Mode Palette */
+    --bg-body: #f7f9fc;        /* Very light cool gray */
+    --bg-surface: #ffffff;     /* Pure white for cards */
+    --bg-secondary: #f1f5f9;   /* Slate 100 for inputs/secondary buttons */
+    
+    /* Text Colors */
+    --text-main: #0f172a;      /* Slate 900 */
+    --text-secondary: #64748b; /* Slate 500 */
+    --text-placeholder: #94a3b8;
+    
+    /* Borders & Shadows */
+    --border-color: #e2e8f0;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    
+    /* Modern shadow stack */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    /* Font */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* =========================================
+   2. GLOBAL RESET & BASE STYLES
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 0;
+}
+
+/* Remove the old "Card" look of the main container to make it full page */
+.container {
+    width: 100%;
+    max-width: 1200px; /* Much wider than before */
+    margin: 0 auto;
+    padding: 40px 24px;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.2s ease;
+}
+
+/* =========================================
+   3. TYPOGRAPHY & HEADER
+   ========================================= */
+header {
+    text-align: left; /* Align left for dashboard feel */
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.025em;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-top: 4px;
+}
+
+/* =========================================
+   4. BUTTONS
+   ========================================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    gap: 8px;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--primary-dark); /* Dark text on lime is readable */
+    box-shadow: 0 4px 12px rgba(132, 204, 22, 0.3); /* Lime shadow */
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(132, 204, 22, 0.4);
+}
+
+.btn-secondary {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-main);
+    border-color: var(--text-secondary);
+}
+
+.btn-success {
+    background-color: var(--success);
+    color: white;
+}
+
+.btn-danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.btn-danger:hover {
+    background-color: #fecaca;
+}
+
+.btn-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.btn-warning:hover {
+    background-color: #fde68a;
+}
+
+/* Actions Bar */
+.actions {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: flex-end; /* Move add button to right */
+}
+
+/* =========================================
+   5. STATS DASHBOARD
+   ========================================= */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.stat {
+    background: var(--bg-surface);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s;
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+}
+
+.stat strong {
+    font-size: 2.5rem;
+    color: var(--text-main);
+    line-height: 1;
+    margin-top: 8px;
+}
+
+/* =========================================
+   6. TODO LIST & CARDS
+   ========================================= */
+.todos-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Grid layout for full page feel */
+    gap: 24px;
+}
+
+.todo-card {
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 6px solid var(--border-color); /* Top accent bar */
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.todo-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+/* Priority Colors (Top Border) */
+.todo-card.priority-high { border-top-color: var(--danger); }
+.todo-card.priority-medium { border-top-color: var(--warning); }
+.todo-card.priority-low { border-top-color: var(--primary); }
+
+.todo-card.completed {
+    opacity: 0.75;
+    background-color: #f8fafc;
+    border-top-color: var(--text-secondary);
+}
+
+.todo-card.completed .todo-title {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+/* Card Header */
+.todo-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.todo-checkbox {
+    width: 22px;
+    height: 22px;
+    accent-color: var(--primary); /* Lime checkbox */
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.todo-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.3;
+}
+
+.todo-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+/* Meta Data */
+.todo-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    background: var(--bg-body);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 20px;
+}
+
+.due-date {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* Card Actions */
+.todo-actions {
+    display: flex;
+    gap: 8px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+}
+
+.todo-actions .btn {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.9rem;
+}
+
+/* Badges */
+.priority-badge {
+    display: none; /* Hidden in card view, handled by top border color for cleaner UI */
+}
+
+/* =========================================
+   7. FORMS (Add/Edit)
+   ========================================= */
+.form-container {
+    background: var(--bg-surface);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 800px; /* Limit form width for readability */
+    margin: 0 auto; /* Center the form */
+    border: 1px solid var(--border-color);
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.required { color: var(--danger); }
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-body);
+    font-size: 1rem;
+    color: var(--text-main);
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary); /* Lime focus ring */
+    background: var(--bg-surface);
+    box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+/* =========================================
+   8. VIEW DETAILS
+   ========================================= */
+.todo-detail-card {
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+.detail-header {
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+}
+
+.detail-title-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.detail-title {
+    width: 100%;
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.status-badge.completed {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+}
+
+.detail-item {
+    background: var(--bg-body);
+    padding: 16px;
+    border-radius: var(--radius-md);
+}
+
+.detail-actions {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 2px solid var(--border-color);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* =========================================
+   9. RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+    
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .todos-list {
+        grid-template-columns: 1fr; /* Stack cards on mobile */
+    }
+    
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .detail-actions {
+        flex-direction: column;
+    }
+    
+    .detail-actions .btn {
+        width: 100%;
+    }
+}
