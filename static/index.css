@@ -1,23 +1,23 @@
    :root {
     /* Brand Colors - Lime Green */
-    --primary: #84cc16;        /* Lime 500 - Main buttons/accents */
-    --primary-hover: #65a30d;  /* Lime 600 - Hover state */
-    --primary-light: #ecfccb;  /* Lime 100 - Backgrounds/Badges */
-    --primary-dark: #365314;   /* Lime 900 - Text on lime */
+    --primary: #84cc16;       
+    --primary-hover: #65a30d;  
+    --primary-light: #ecfccb;  
+    --primary-dark: #365314;   
     
     /* Semantic Colors */
     --danger: #ef4444;
     --warning: #f59e0b;
-    --success: #10b981; /* distinct from primary to indicate 'safe' */
+    --success: #10b981; 
     
     /* Neutral / Light Mode Palette */
-    --bg-body: #f7f9fc;        /* Very light cool gray */
-    --bg-surface: #ffffff;     /* Pure white for cards */
-    --bg-secondary: #f1f5f9;   /* Slate 100 for inputs/secondary buttons */
+    --bg-body: #f7f9fc;        
+    --bg-surface: #ffffff;     
+    --bg-secondary: #f1f5f9;   
     
     /* Text Colors */
-    --text-main: #0f172a;      /* Slate 900 */
-    --text-secondary: #64748b; /* Slate 500 */
+    --text-main: #0f172a;      
+    --text-secondary: #64748b; 
     --text-placeholder: #94a3b8;
     
     /* Borders & Shadows */
